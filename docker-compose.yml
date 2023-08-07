@@ -14,7 +14,7 @@ services:
       MYSQL_DB: todos
 
   mysql:
-    image: mysql:8.0
+    image: stevenestramil/mysql 
     working_dir: /app
     volumes:
       - ./:/app
