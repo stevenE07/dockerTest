@@ -28,9 +28,9 @@ self = <autenticacion.tests.AutenticacionTestCase testMethod=test_login_empresa>
         assert response.status_code == status.HTTP_200_OK
         assert response.data["tipo_usuario"] == "empresa"
 >       assert response.data["token"] is None
-E       AssertionError: assert '1fb9175eaf346a35a374918e4f417430d90ee6641ae336495fe70a0abb9582a0' is None
+E       AssertionError: assert '69cfbcd48a34eca9faf39ed601829566ca9e8c18b4e6d2e03300919404bb454a' is None
 
 autenticacion/tests.py:71: AssertionError
 =========================== short test summary info ============================
 FAILED autenticacion/tests.py::AutenticacionTestCase::test_login_empresa - As...
-========================= 1 failed, 6 passed in 1.93s ==========================
+========================= 1 failed, 6 passed in 1.94s ==========================
