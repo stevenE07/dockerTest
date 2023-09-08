@@ -28,4 +28,4 @@ jobs:
           done
 
       - name: Ejecutar pruebas con pytest
-        run: docker-compose exec -it web pytest -ra
+        run: docker-compose exec -it web pytest -ra 2>&1 
