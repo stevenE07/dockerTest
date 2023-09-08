@@ -13,13 +13,13 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v2
 
-      - name: Configurar Python
+      - name: Configurar Docker
         uses: actions/setup-python@v2
         with:
           python-version: 3.x
 
       - name: Iniciar contenedor de Docker
-        run: docker-compose up -d
+        run: docker-compose up --build -d
 
       - name: Esperar a que el servicio Django esté disponible
         run: |
@@ -27,6 +27,11 @@ jobs:
             sleep 5
           done
 
-      - name: Ejecutar pruebas con pytest
-        run: |
-          docker-compose exec -t web pytest -ra
+      - name: Ejecutar pruebas con pytest y redirigir la salida a un archivo
+        run: docker-compose exec web pytest -ra > test_output.txt 2>&1
+
+      - name: Subir el archivo de salida de las pruebas como un artefacto
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-output
+          path: test_output.txt
