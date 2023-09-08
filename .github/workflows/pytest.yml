@@ -28,5 +28,5 @@ jobs:
           done
 
       - name: Ejecutar pruebas con pytest y redirigir la salida a un archivo
-        run: docker-compose exec web pytest -ra
+        run: docker-compose exec -T web pytest -ra
         
