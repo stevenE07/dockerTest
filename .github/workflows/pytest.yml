@@ -28,7 +28,7 @@ jobs:
           done
 
       - name: Ejecutar pruebas con pytest y redirigir la salida a un archivo
-        run: docker-compose exec web pytest -ra > test_output.txt 2>&1
+        run: docker-compose exec -it web pytest -ra > test_output.txt 2>&1
 
       - name: Subir el archivo de salida de las pruebas como un artefacto
         uses: actions/upload-artifact@v2
