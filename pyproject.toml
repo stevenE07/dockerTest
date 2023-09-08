@@ -70,3 +70,6 @@ per-file-ignores = {}
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 target-version = "py310"
+
+[pytest]
+addopts = -ra
