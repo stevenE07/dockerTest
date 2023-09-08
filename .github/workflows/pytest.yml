@@ -6,7 +6,7 @@ on:
       - prueba  # Cambia esto al nombre de tu rama principal si es diferente
 
 jobs:
-  build:
+  tests:
     runs-on: ubuntu-latest
 
     steps:
