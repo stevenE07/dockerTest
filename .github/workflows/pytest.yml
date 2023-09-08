@@ -19,7 +19,7 @@ jobs:
           python-version: 3.x
 
       - name: Iniciar contenedor de Docker
-        run: docker-compose up -d
+        run: docker-compose up --build -d
 
       - name: Esperar a que el servicio Django esté disponible
         run: |
