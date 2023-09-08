@@ -29,10 +29,5 @@ jobs:
 
       - name: Ejecutar pruebas con pytest y redirigir la salida a un archivo
         run: |
-          docker-compose exec -it web pytest -ra
-          PYTEST_EXIT_CODE=$?
-          if [ $PYTEST_EXIT_CODE -eq 0 ]; then
-            echo "Las pruebas pasaron exitosamente."
-          else
-            echo "Las pruebas fallaron. Código de salida: $PYTEST_EXIT_CODE"
-          fi
+          docker-compose exec -it web pytest -ra >test_output.txt 2>&1
+          sleep 5
