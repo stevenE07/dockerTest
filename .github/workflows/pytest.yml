@@ -3,7 +3,7 @@ name: Django Tests
 on:
   push:
     branches:
-      - prueba  # Cambia esto al nombre de tu rama principal si es diferente
+      - main  # Cambia esto al nombre de tu rama principal si es diferente
 
 jobs:
   build:
@@ -13,13 +13,13 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v2
 
-      - name: Configurar Docker
+      - name: Configurar Python
         uses: actions/setup-python@v2
         with:
           python-version: 3.x
 
       - name: Iniciar contenedor de Docker
-        run: docker-compose up --build -d
+        run: docker-compose up -d
 
       - name: Esperar a que el servicio Django esté disponible
         run: |
@@ -28,4 +28,5 @@ jobs:
           done
 
       - name: Ejecutar pruebas con pytest
-        run: docker-compose exec -it web pytest -ra 2>&1 | tee pytest.log
+        run: |
+          docker-compose exec web pytest -ra
