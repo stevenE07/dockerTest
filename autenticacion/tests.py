@@ -68,7 +68,7 @@ class AutenticacionTestCase(APITestCase):
 
         assert response.status_code == status.HTTP_200_OK
         assert response.data["tipo_usuario"] == "empresa"
-        assert response.data["token"] is not None
+        assert response.data["token"] is None 
 
     def test_login_admin(self):
         "Se testea que el login de un administrador sea correcto."

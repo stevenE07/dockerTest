@@ -27,14 +27,6 @@ jobs:
             sleep 5
           done
 
-      - name: Ejecutar pruebas con pytest y redirigir la salida a un archivo en el contenedor
-        run: docker-compose exec -it web sh -c "pytest -ra > ./test_output.txt"
+      - name: Ejecutar pruebas con pytest y redirigir la salida a un archivo
+        run: docker-compose exec -it web pytest -ra 
 
-      - name: Copiar archivo de salida del contenedor al host
-        run: docker cp web:./test_output.txt ./test_output.txt
-
-      - name: Subir el archivo de salida de las pruebas como un artefacto
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-output
-          path: test_output.txt
