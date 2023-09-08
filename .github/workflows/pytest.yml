@@ -9,30 +9,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      db:
-        image: postgres:13
-        env:
-          POSTGRES_NAME: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: 1234
-        ports:
-          - "5432:5432"
-
     steps:
       - name: Checkout código
         uses: actions/checkout@v2
 
-      - name: Configurar Python
+      - name: Configurar Docker
         uses: actions/setup-python@v2
         with:
           python-version: 3.x
 
-      - name: Instalar dependencias
-        run: pip install -r requirements.txt  # Asegúrate de ajustar esto a tus requisitos
+      - name: Iniciar contenedor de Docker
+        run: docker-compose up --build -d
 
-      - name: Ejecutar migraciones
-        run: python manage.py migrate
+      - name: Esperar a que el servicio Django esté disponible
+        run: |
+          while ! curl -s http://localhost:8000; do
+            sleep 5
+          done
 
-      - name: Ejecutar pruebas con pytest
-        run: pytest -ra
+      - name: Ejecutar pruebas con pytest y redirigir la salida a un archivo
+        run: |
+          docker-compose exec -it web pytest -ra > ./test_output.txt 2>&1
+
+      - name: Mostrar el contenido del archivo de salida
+        run: cat $./test_output.txt
