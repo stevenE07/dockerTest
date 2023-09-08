@@ -1,1 +1,7 @@
 node_modules
+*.pyc
+*__pycache__
+pytest.xml
+pytest-coverage.txt
+
+.coverage

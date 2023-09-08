@@ -1,0 +1,31 @@
+name: Django Tests
+
+on:
+  push:
+    branches:
+      - prueba  # Cambia esto al nombre de tu rama principal si es diferente
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
+
+      - name: Configurar Docker
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Iniciar contenedor de Docker
+        run: docker-compose up --build -d
+
+      - name: Esperar a que el servicio Django esté disponible
+        run: |
+          while ! curl -s http://localhost:8000; do
+            sleep 5
+          done
+
+      - name: Ejecutar pruebas con pytest
+        run: docker-compose exec web pytest -ra

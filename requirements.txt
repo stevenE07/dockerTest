@@ -1,0 +1,15 @@
+asgiref==3.5.0
+Django==4.0.4
+django-cors-headers==4.2.0
+django-crontab==0.7.1
+django-rest-knox==4.2.0
+djangorestframework==3.14.0
+psycopg2-binary==2.9.3
+python-dotenv==1.0.0
+sqlparse==0.4.2
+
+# Aqui los de desarrollo/testing
+pytest==7.4.1
+pytest-cov==4.1.0
+pytest-django==4.5.2
+pytest-dotenv==0.5.2
